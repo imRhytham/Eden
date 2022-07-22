@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import Button from '../components/Button';
 import Input from '../components/Input';
+import { MultiStepContext } from './../Context/StepContext';
 
-const StepOne = (props) => {
-	const [userData, setUserData] = useState(props.data);
-
-	if (props.currentStep !== 1) {
-		return null;
-	}
+const StepOne = () => {
+	const { userData, setUserData, setCurrentStep } =
+		useContext(MultiStepContext);
 
 	const handleChange = (e, key) => {
 		setUserData((userData[key] = e.target.value));
+	};
+
+	const handleSubmit = () => {
+		if (!userData.fullName && !userData.displayName) return;
+		setCurrentStep(2);
 	};
 
 	return (
@@ -26,6 +30,7 @@ const StepOne = (props) => {
 					placeholder='Steve Jobs'
 					value={userData.fullName}
 					onChange={(e) => handleChange(e, 'fullName')}
+					required={true}
 				/>
 			</div>
 			<div className='mt-3'>
@@ -34,7 +39,11 @@ const StepOne = (props) => {
 					placeholder='Steve'
 					value={userData.fullName}
 					onChange={(e) => handleChange(e, 'displayName')}
+					required={true}
 				/>
+			</div>
+			<div className='mt-3'>
+				<Button onClick={handleSubmit} title={'create Workspace'} />
 			</div>
 		</div>
 	);

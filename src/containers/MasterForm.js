@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import logo from './../Assets/images/logo.png';
 import MultiStepProgressBar from '../components/MultiStepProgressBar';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
-import Button from '../components/Button';
+import { MultiStepContext } from './../Context/StepContext';
 
 const MasterForm = () => {
-	const [userData, setUserData] = useState({
-		fullName: '',
-		displayName: '',
-		workspaceName: '',
-		workspaceURL: '',
-		isIndividual: true,
-	});
-	const [currentStep, setCurrentStep] = useState(1);
+	const { currentStep } = useContext(MultiStepContext);
 
-	const renderNextForm = () => {
-		currentStep <= 3 ? setCurrentStep(currentStep + 1) : setCurrentStep(4);
+	const rendeForm = (step) => {
+		switch (step) {
+			case 1:
+				return <StepOne />;
+			case 2:
+				return <StepTwo />;
+			case 3:
+				return <StepThree />;
+			default:
+				return <StepFour />;
+		}
 	};
 
 	return (
@@ -30,16 +32,7 @@ const MasterForm = () => {
 			<div className='my-12'>
 				<MultiStepProgressBar currentStep={currentStep} />
 			</div>
-			<StepOne currentStep={currentStep} data={userData} />
-			<StepTwo currentStep={currentStep} data={userData} />
-			<StepThree currentStep={currentStep} data={userData} />
-			<StepFour currentStep={currentStep} />
-			<div className='mt-3'>
-				<Button
-					onClick={renderNextForm}
-					title={currentStep === 4 ? 'Launch Eden' : 'create Workspace'}
-				/>
-			</div>
+			{rendeForm(currentStep)}
 		</div>
 	);
 };

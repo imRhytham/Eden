@@ -3,7 +3,10 @@ import React from 'react';
 const Input = (props) => {
 	return (
 		<div className=''>
-			<label for='input' className='inline-block mb-2 text-gray-700 font-bold'>
+			<label
+				htmlFor='input'
+				className='inline-block mb-2 text-gray-700 font-bold'
+			>
 				{props.title}
 				<input
 					className='block
@@ -23,6 +26,7 @@ const Input = (props) => {
 					id='input'
 					value={props.value}
 					placeholder={props.placeholder}
+					required={props.required}
 				/>
 			</label>
 		</div>
