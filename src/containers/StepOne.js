@@ -11,11 +11,6 @@ const StepOne = () => {
 		setUserData((userData[key] = e.target.value));
 	};
 
-	const handleSubmit = () => {
-		if (!userData.fullName && !userData.displayName) return;
-		setCurrentStep(2);
-	};
-
 	return (
 		<div className='w-64 md:w-[500px] flex flex-col justify-center items-center'>
 			<div className='flex flex-col justify-center items-center'>
@@ -43,7 +38,7 @@ const StepOne = () => {
 				/>
 			</div>
 			<div className='mt-3'>
-				<Button onClick={handleSubmit} title={'create Workspace'} />
+				<Button onClick={() => setCurrentStep(2)} title={'create Workspace'} />
 			</div>
 		</div>
 	);
