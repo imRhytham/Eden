@@ -21,7 +21,7 @@ const StepThree = () => {
 						<input
 							type='radio'
 							id='individual'
-							name='individual'
+							name='isIndividual'
 							value='individual'
 							className='hidden peer'
 							required
@@ -56,7 +56,7 @@ const StepThree = () => {
 						<input
 							type='radio'
 							id='team'
-							name='team'
+							name='isIndividual'
 							value='team'
 							className='hidden peer'
 						/>
